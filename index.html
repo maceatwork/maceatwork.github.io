@@ -3,131 +3,1224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maceatwork - Motion Designer Portfolio</title>
+    <title>Martin Ilievski - Motion Designer Portfolio</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
+        /* CSS Variables for easy theming */
+        :root {
+            --primary: #0099ff;
+            --primary-dark: #0077cc;
+            --secondary: #00c9ff;
+            --accent: #ff6b6b;
+            --dark: #111111;
+            --darker: #0a0a0a;
+            --light: #eeeeee;
+            --lighter: #f5f5f5;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --text-muted: #888888;
+            --radius: 8px;
+            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            --max-width: 1200px;
+        }
+        
+        /* Reset and base styles */
+        * {
             margin: 0;
             padding: 0;
-            color: #eee;
-            background: #111;
+            box-sizing: border-box;
         }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        /* Smooth transitions */
+        a, button, .btn, .link, input, textarea, select {
+            transition: var(--transition);
+        }
+        
+        /* Container */
+        .container {
+            width: 90%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Header */
         header {
-            background: #1a1a1a;
-            color: #fff;
-            padding: 2rem 1rem;
+            background: var(--darker);
+            padding: 4rem 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, var(--primary) 0%, transparent 70%);
+            opacity: 0.1;
+            animation: pulse 6s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.1; }
+            50% { transform: scale(1.2); opacity: 0.15; }
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
             text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
         }
-        header h1 {
-            margin: 0;
-            font-size: 2.2rem;
+        
+        .header-content h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+            position: relative;
+            display: inline-block;
         }
-        section {
-            padding: 2rem 1rem;
-            max-width: 960px;
-            margin: auto;
+        
+        .header-content h1::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
         }
-        .links {
+        
+        .header-content p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(17, 17, 17, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
             display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 1rem;
+            justify-content: space-between;
+            align-items: center;
         }
-        .links a {
-            background: #0099ff;
-            color: #fff;
-            padding: 0.8rem 1.2rem;
+        
+        .nav-logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--text-primary);
             text-decoration: none;
-            border-radius: 4px;
-            font-weight: bold;
         }
-        .links a:hover {
-            background: #0077cc;
+        
+        .nav-logo span {
+            color: var(--primary);
         }
-        .youtube {
-            margin-top: 1.5rem;
+        
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
         }
-        .testimonials blockquote {
-            background: #1a1a1a;
-            border-left: 4px solid #0099ff;
-            padding: 1rem;
-            margin: 1.5rem 0;
+        
+        .nav-menu a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
         }
-        footer {
+        
+        .nav-menu a:hover {
+            color: var(--text-primary);
+        }
+        
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+        
+        /* Sections */
+        section {
+            padding: 6rem 0;
+            position: relative;
+        }
+        
+        section:nth-child(even) {
+            background-color: rgba(17, 17, 17, 0.5);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            position: relative;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .section-title p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+        
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        @media (min-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        .about-text {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .about-text h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            color: var(--text-light);
+        }
+        
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .stat-item {
             text-align: center;
             padding: 1.5rem;
-            background: #1a1a1a;
-            color: #ccc;
-            font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        @media (max-width: 600px) {
-            header h1 { font-size: 1.8rem; }
-            section { padding: 1.5rem 0.5rem; }
+        
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 153, 255, 0.2);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .about-image {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+            animation-delay: 0.2s;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            border: 3px solid var(--primary);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image img:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Portfolio Section */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .portfolio-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 153, 255, 0.3);
+        }
+        
+        .portfolio-image {
+            height: 200px;
+            overflow: hidden;
+            background: var(--darker);
+        }
+        
+        .portfolio-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .portfolio-item:hover .portfolio-image img {
+            transform: scale(1.1);
+        }
+        
+        .portfolio-content {
+            padding: 1.5rem;
+        }
+        
+        .portfolio-content h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+        
+        .portfolio-content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .portfolio-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .portfolio-tag {
+            background: rgba(0, 153, 255, 0.2);
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        /* Featured Video Section */
+        .featured-video {
+            text-align: center;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .featured-video::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, var(--primary) 0%, transparent 70%);
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        .featured-video h2 {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 2px solid var(--primary);
+        }
+        
+        .video-container iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+            display: block;
+        }
+        
+        /* Testimonials Section */
+        .testimonials-slider {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .testimonial-slide {
+            text-align: center;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.5s ease;
+        }
+        
+        .testimonial-slide.active {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 10;
+        }
+        
+        .testimonial-slide.prev,
+        .testimonial-slide.next {
+            z-index: 5;
+            opacity: 0.5;
+            transform: scale(0.95);
+        }
+        
+        .testimonial-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .testimonial-content p {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .testimonial-content p::before,
+        .testimonial-content p::after {
+            content: '"';
+            font-size: 2.5rem;
+            color: var(--primary);
+            opacity: 0.7;
+        }
+        
+        .testimonial-content p::before {
+            margin-right: 0.5rem;
+        }
+        
+        .testimonial-content p::after {
+            margin-left: 0.5rem;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .testimonial-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--primary);
+        }
+        
+        .testimonial-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .testimonial-info {
+            text-align: left;
+        }
+        
+        .testimonial-name {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+        
+        .testimonial-role {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+        
+        .testimonial-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+        
+        .nav-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .nav-btn:active {
+            transform: scale(0.9);
+        }
+        
+        /* Call to Action Section */
+        .cta-section {
+            text-align: center;
+            padding: 8rem 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta-content h2 {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 2rem;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .cta-content p {
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.9);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            line-height: 1.7;
+        }
+        
+        .btn-primary,
+        .btn-secondary {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        
+        .btn-secondary {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-3px);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--darker);
+            padding: 3rem 0 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 2rem;
+        }
+        
+        .footer-logo {
+            font-weight: 700;
+            font-size: 1.75rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .footer-logo span {
+            color: var(--primary);
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 1.25rem;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-social a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                padding: 3rem 0 1.5rem;
+            }
+            
+            .header-content h1 {
+                font-size: clamp(2rem, 6vw, 3rem);
+            }
+            
+            .nav-menu {
+                gap: 1rem;
+            }
+            
+            .nav-menu a {
+                font-size: 0.9rem;
+            }
+            
+            section {
+                padding: 4rem 0;
+            }
+            
+            .about-content,
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .video-container iframe {
+                height: 300px;
+            }
+            
+            .cta-content h2 {
+                font-size: clamp(1.75rem, 5vw, 2.5rem);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-menu {
+                margin-top: 1rem;
+            }
+            
+            .header-content {
+                padding: 0 1rem;
+            }
+            
+            .cta-section {
+                padding: 6rem 0;
+            }
+        }
+        
+        /* Loading animation for initial load */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        body::after {
+            content: '';
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 50px;
+            height: 50px;
+            margin: -25px 0 0 -25px;
+            border: 3px solid var(--text-secondary);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            z-index: 10000;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Animate elements on scroll */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+            
+            header, nav, .cta-section, .btn-primary, .btn-secondary, .footer-social {
+                display: none;
+            }
+            
+            .section-title h2::after,
+            .stat-number,
+            .portfolio-tag,
+            .btn-secondary {
+                background: black !important;
+                color: white !important;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container container">
+            <a href="#" class="nav-logo">M<span>artin</span> Ilievski</a>
+            <div class="nav-menu">
+                <a href="#about">About</a>
+                <a href="#portfolio">Portfolio</a>
+                <a href="#featured">Featured</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#cta">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
     <header>
-        <h1>Maceatwork</h1>
-        <p>Motion Designer & Animator</p>
+        <div class="header-content container">
+            <h1>Martin Ilievski</h1>
+            <p>Motion Designer & Animator<br>Creating compelling visual stories through motion</p>
+        </div>
     </header>
 
-    <section id="about">
-        <h2>About Me</h2>
-        <p>
-            Passionate motion designer with experience in creating engaging animations, 
-            title sequences, and visual effects for brands and clients. 
-            Proficient in After Effects, Cinema 4D, and Premiere Pro.
-        </p>
-    </section>
-
-    <section id="portfolio">
-        <h2>Portfolio</h2>
-        <p>Explore my work through the links below:</p>
-        <div class="links">
-            <a href="https://drive.google.com/drive/folders/1AZZWirZZxrkWcxcXXNXUd52KB4FM_qJg?usp=drive_link" target="_blank" rel="noopener">
-                Google Drive Portfolio
-            </a>
-            <a href="https://www.youtube.com/@macidoniaproject" target="_blank" rel="noopener">
-                YouTube Channel
-            </a>
-            <a href="https://www.upwork.com/freelancers/~014f22a842c569a2fd" target="_blank" rel="noopener">
-                Upwork Profile
-            </a>
+    <!-- About Section -->
+    <section id="about" class="animate-on-scroll">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Me</h2>
+                <p>Passionate motion designer bringing ideas to life through animation</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Professional Motion Designer</h3>
+                    <p>With years of experience in creating engaging animations, title sequences, and visual effects for brands and clients worldwide. I specialize in transforming concepts into dynamic visual experiences that captivate audiences and elevate brand messaging.</p>
+                    
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Job Success</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">Top Rated</span>
+                            <span class="stat-label">Upwork Provider</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">Projects Completed</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-image">
+                    <!-- Placeholder for personal photo or work-in-progress shot -->
+                    <img src="https://via.placeholder.com/400x500/0099ff/ffffff?text=Martin+Ilievski" alt="Martin Ilievski - Motion Designer">
+                </div>
+            </div>
         </div>
     </section>
 
-    <section class="youtube">
-        <h2>Featured Video</h2>
-        <!-- Replace VIDEO_ID with the ID of the YouTube video you want to showcase -->
-        <!-- Example: https://www.youtube.com/watch?v=VIDEO_ID -->
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID" 
-                title="YouTube video player" frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen></iframe>
-    </section>
-
-    <section id="testimonials">
-        <h2>Client Feedback</h2>
-        <div class="testimonials">
-            <blockquote>
-                <p>"Maceatwork delivered stunning animations on time and exceeded our expectations."</p>
-                <cite>Client Name, Company</cite>
-            </blockquote>
-            <blockquote>
-                <p>"Highly skilled motion designer, great communication, and creative solutions."</p>
-                <cite>Another Client, Agency</cite>
-            </blockquote>
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="animate-on-scroll">
+        <div class="container">
+            <div class="section-title">
+                <h2>Portfolio Highlights</h2>
+                <p>Selected works showcasing range and expertise</p>
+            </div>
+            
+            <div class="portfolio-grid">
+                <!-- Portfolio Item 1 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="https://via.placeholder.com/400x300/0099ff/ffffff?text=Animation+Sample+1" alt="Animation Sample 1">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Brand Identity Animation</h3>
+                        <p>Complete brand identity package including logo animation, color reveals, and motion guidelines for tech startup.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Logo Animation</span>
+                            <span class="portfolio-tag">Brand Identity</span>
+                            <span class="portfolio-tag">After Effects</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 2 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="https://via.placeholder.com/400x300/0099ff/ffffff?text=Animation+Sample+2" alt="Animation Sample 2">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Explainer Video Series</h3>
+                        <p>Educational content series combining motion graphics, kinetic typography, and character animation for complex concepts.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Explainer Video</span>
+                            <span class="portfolio-tag">Kinetic Typography</span>
+                            <span class="portfolio-tag">Character Animation</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 3 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="https://via.placeholder.com/400x300/0099ff/ffffff?text=Animation+Sample+3" alt="Animation Sample 3">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Social Media Campaign</h3>
+                        <p>Animated assets for multi-platform social media campaign including stories, posts, and interactive elements.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Social Media</span>
+                            <span class="portfolio-tag">Motion Graphics</span>
+                            <span class="portfolio-tag">Illustrator</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 4 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="https://via.placeholder.com/400x300/0099ff/ffffff?text=Animation+Sample+4" alt="Animation Sample 4">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Title Sequence</h3>
+                        <p>Cinematic title sequence for documentary film featuring custom typography and visual effects.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Title Sequence</span>
+                            <span class="portfolio-tag">Cinematic</span>
+                            <span class="portfolio-tag">Visual Effects</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 5 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="https://via.placeholder.com/400x300/0099ff/ffffff?text=Animation+Sample+5" alt="Animation Sample 5">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Product Visualization</h3>
+                        <p>3D product animation showcasing features, materials, and functionality for e-commerce platform.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Product Animation</span>
+                            <span class="portfolio-tag">3D Animation</span>
+                            <span class="portfolio-tag">Rendering</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 6 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="https://via.placeholder.com/400x300/0099ff/ffffff?text=Animation+Sample+6" alt="Animation Sample 6">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>UI/UX Motion Design</h3>
+                        <p>Interface animations and micro-interactions for mobile and web applications.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">UI Animation</span>
+                            <span class="portfolio-tag">Micro-interactions</span>
+                            <span class="portfolio-tag">Figma</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <a href="https://drive.google.com/drive/folders/1AZZWirZZxrkWcxcXXNXUd52KB4FM_qJg?usp=drive_link" target="_blank" class="btn-secondary">View Full Portfolio →</a>
+            </div>
         </div>
     </section>
 
+    <!-- Featured Video Section -->
+    <section id="featured" class="animate-on-scroll">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Work</h2>
+                <p>Selected highlight demonstrating technical and creative expertise</p>
+            </div>
+            
+            <div class="featured-video">
+                <h2>Latest Project Showcase</h2>
+                <div class="video-container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/F6db0hA08ts" 
+                            title="YouTube video player" frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>
+                <p class="mt-3"><em>Watch the full project case study on my YouTube channel</em></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="animate-on-scroll">
+        <div class="container">
+            <div class="section-title">
+                <h2>Client Feedback</h2>
+                <p>What collaborators are saying about working together</p>
+            </div>
+            
+            <div class="testimonials-slider">
+                <!-- Testimonial Slide 1 -->
+                <div class="testimonial-slide active">
+                    <div class="testimonial-content">
+                        <p>"Martin transformed our brand vision into stunning motion graphics that exceeded all expectations. His attention to detail and creative problem-solving made the collaboration seamless and the results outstanding."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">
+                            <img src="https://via.placeholder.com/80x80/0099ff/ffffff?text=AB" alt="Avatar">
+                        </div>
+                        <div class="testimonial-info">
+                            <h3 class="testimonial-name">Alexandra Chen</h3>
+                            <p class="testimonial-role">Creative Director, TechStartup Inc.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial Slide 2 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-content">
+                        <p>"Working with Martin was a pleasure from start to finish. He delivered high-quality animations on time, communicated effectively throughout the process, and brought innovative ideas that elevated our project beyond the initial brief."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">
+                            <img src="https://via.placeholder.com/80x80/0099ff/ffffff?text=CD" alt="Avatar">
+                        </div>
+                        <div class="testimonial-info">
+                            <h3 class="testimonial-name">Daniel Rodriguez</h3>
+                            <p class="testimonial-role">Product Manager, DesignAgency LLC</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial Slide 3 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-content">
+                        <p>"The motion graphics Martin created for our campaign significantly increased engagement and conversion rates. His technical expertise combined with artistic vision makes him an invaluable creative partner."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">
+                            <img src="https://via.placeholder.com/80x80/0099ff/ffffff?text=EF" alt="Avatar">
+                        </div>
+                        <div class="testimonial-info">
+                            <h3 class="testimonial-name">Sarah Williams</h3>
+                            <p class="testimonial-role">Marketing Director, E-Commerce Corp</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-nav">
+                <button class="nav-btn" id="prevBtn">‹</button>
+                <button class="nav-btn" id="nextBtn">›</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section id="cta">
+        <div class="container">
+            <div class="cta-section">
+                <div class="cta-content">
+                    <h2>Ready to Bring Your Vision to Life?</h2>
+                    <p>Let's collaborate to create motion that engages, informs, and inspires your audience.</p>
+                    <a href="https://www.upwork.com/freelancers/~014f22a842c569a2fd" target="_blank" class="btn-primary">Hire Me on Upwork</a>
+                    <a href="https://www.upwork.com/freelancers/~014f22a842c569a2fd" target="_blank" class="btn-secondary">View Full Profile</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <p>&copy; <span id="year"></span> Maceatwork. All rights reserved.</p>
+        <div class="footer-content container">
+            <div class="footer-logo">M<span>artin</span> Ilievski</div>
+            <div class="footer-links">
+                <a href="https://drive.google.com/drive/folders/1AZZWirZZxrkWcxcXXNXUd52KB4FM_qJg?usp=drive_link" target="_blank">Portfolio</a>
+                <a href="https://www.youtube.com/@macidoniaproject" target="_blank">YouTube Channel</a>
+                <a href="https://www.upwork.com/freelancers/~014f22a842c569a2fd" target="_blank">Upwork Profile</a>
+            </div>
+            <div class="footer-social">
+                <a href="#" aria-label="Instagram">📷</a>
+                <a href="#" aria-label="Behance">🎨</a>
+                <a href="#" aria-label="LinkedIn">💼</a>
+                <a href="#" aria-label="Twitter">🐦</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="year"></span> Martin Ilievski. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
 
     <script>
+        // Year update
         document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Testimonial slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.testimonial-slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active', 'prev', 'next');
+                if (i === index) {
+                    slide.classList.add('active');
+                } else if (i === index - 1 || (index === 0 && i === slides.length - 1)) {
+                    slide.classList.add('prev');
+                } else if (i === index + 1 || (index === slides.length - 1 && i === 0)) {
+                    slide.classList.add('next');
+                }
+            });
+        }
+        
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+        
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+        
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
+        
+        // Auto-advance every 5 seconds
+        setInterval(nextSlide, 5000);
+        
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Remove loading animation after content loads
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.body.style.overflow = 'auto';
+                // The loading pseudo-elements are handled via CSS animation completion
+            }, 1500);
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
     </script>
 </body>
 </html>
