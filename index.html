@@ -816,6 +816,10 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+body.loaded::before,
+body.loaded::after {
+    display: none;
+}
         
         /* Animate elements on scroll */
         .animate-on-scroll {
@@ -1235,6 +1239,7 @@
             observer.observe(el);
         });
         
+                document.body.classList.add('loaded');
         // Remove loading animation after content loads
         window.addEventListener('load', () => {
             setTimeout(() => {
