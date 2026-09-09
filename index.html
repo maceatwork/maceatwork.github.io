@@ -1,73 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Martin Ilievski - Motion Designer Portfolio</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-        }
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        header h1 {
-            color: #2c3e50;
-        }
-        .btn {
-            display: inline-block;
-            background-color: #3498db;
-            color: white;
-            padding: 12px 24px;
-            margin: 10px;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-        .btn:hover {
-            background-color: #2980b9;
-        }
-        .btn-secondary {
-            background-color: #95a5a6;
-        }
-        .btn-secondary:hover {
-            background-color: #7f8c8d;
-        }
-        .links {
-            text-align: center;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Martin Ilievski — Motion Designer &amp; Animator</title>
+<meta name="description" content="Martin Ilievski (Mace) is a Top Rated motion designer and animator — 100% job success, 250+ completed projects. Hire on Upwork or explore motion work.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Archivo:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+<style>
+/* =============================================================
+   Design contract — Pure Motion (modern editorial)
+   THESIS:  A motion designer's calling card that itself demonstrates
+            disciplined motion craft. Refuses the "dark hero + neon glow"
+            default; near-black is near-monochrome and premium,
+            static background, white type carries the hierarchy.
+   OWN-WORLD: near-black ground (#0a0a0c), warm off-white ink (#f2eee7),
+            hairline grid hairlines at ~7% white, static dark background.
+   STORY:   Visitor sees, in one viewport: the name at scale, the role and
+            trust stats, and four clear actions. The page feels alive and
+            precise, like the portfolio it represents.
+   FIRST VIEWPORT: screen-filling name (masthead), trust line beneath, then a
+            dense row of four actions — "Hire Me on Upwork" primary (filled
+            off-white), three hairlined ghosts. Monogram mark top-left, small
+            "Macidonia Design" wordmark. Vertical klinetic hairline grid.
+   FORM:    Pure Motion direction; list position 3; seed key b8b28482.
+   FINISH:  unreviewed and undocumented is unfinished; this build ends with
+            the finish review, the verdict, DESIGN.md, and every shipping
+            raster carrying its provenance.
+   ============================================================= */
+
+:root{
+  --bg:#0a0a0c;
+  --bg-2:#0f0f13;
+  --ink:#f2eee7;
+  --ink-dim:#b9b3aa;
+  --ink-faint:#7c766e;
+  --hairline:rgba(242,238,231,.09);
+  --hairline-strong:rgba(242,238,231,.18);
+  --accent:#e8d9b0;             /* restrained warm gold: single accent, not neon */
+  --sans:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --ease-out:cubic-bezier(.19,1,.22,1);
+  --measure:66ch;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+  min-height:100vh;
+}
+
+/* ---- theme the parts you did not draw ---- */
+::selection{background:var(--accent);color:#0a0a0c}
+::-moz-selection{background:var(--accent);color:#0a0a0c}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+a{color:inherit;text-decoration:none}
+
+/* ---- background -- STATIC dark ---- */
+.scene{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+/* hairline grid (static, no animation) */
+.grid-lines{
+  position:absolute;inset:-20vh -20vw;
+  background-image:
+    repeating-linear-gradient(to right,var(--hairline) 0 1px,transparent 1px 12vw),
+    repeating-linear-gradient(to bottom,var(--hairline) 0 1px,transparent 1px 12vh);
+  opacity:.5;
+}
+/* soft radial (static) */
+.glow{
+  position:absolute;width:70vmax;height:70vmax;right:-20vmax;top:-25vmax;
+  background:radial-gradient(circle at center,rgba(232,217,176,.07) 0,rgba(232,217,176,0) 62%);
+}
+/* vignette to seat type */
+.vignette{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 42%,transparent 30%,rgba(0,0,0,.55) 100%)}
+
+/* ---- layout shell ---- */
+.page{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 clamp(20px,4vw,48px)}
+
+header.top{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:28px 0;
+  border-bottom:1px solid var(--hairline);
+}
+.marca{display:flex;align-items:center;gap:12px;letter-spacing:.02em}
+.marca .mark{
+  width:34px;height:34px;display:grid;place-items:center;
+  border:1px solid var(--hairline-strong);border-radius:50%;
+  font-weight:700;font-size:13px;color:var(--ink)
+}
+.marca .word{font-weight:600;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-dim)}
+.top .meta{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint)}
+
+/* ---- principal unit ---- */
+.principal{
+  min-height:72vh;
+  display:grid;place-items:center;align-content:center;
+  padding:9vh 0 7vh;text-align:left;
+}
+.kicker{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);margin-bottom:22px}
+h1.masthead{
+  font-family:var(--sans);font-weight:800;
+  font-size:clamp(2.6rem,9vw,7rem);
+  line-height:.95;letter-spacing:-.03em;max-width:14ch;
+  text-wrap:balance;
+}
+.lede{
+  margin-top:26px;max-width:var(--measure);
+  font-size:clamp(1.05rem,1.6vw,1.2rem);color:var(--ink-dim);
+}
+.lede strong{color:var(--ink);font-weight:600}
+.trust{
+  margin-top:34px;display:flex;flex-wrap:wrap;gap:10px;
+}
+.trust span{
+  font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-faint);padding:7px 13px;
+  border:1px solid var(--hairline);border-radius:2px;
+}
+.trust span b{color:var(--ink);font-weight:600}
+
+/* ---- actions ---- */
+.actions{
+  width:100%;display:grid;gap:14px;
+  margin-top:clamp(36px,6vh,60px);
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));
+}
+.action{
+  position:relative;display:flex;align-items:center;gap:14px;
+  padding:20px 22px;border-radius:3px;
+  border:1px solid var(--hairline-strong);
+  background:linear-gradient(180deg,rgba(255,255,255,.015),rgba(255,255,255,0));
+  transition:transform .45s var(--ease-out),border-color .45s,border-radius .45s,background .45s;
+  min-height:82px;overflow:hidden;
+}
+.action .ico{flex:0 0 34px;display:grid;place-items:center;color:var(--ink-dim)}
+.action .ico svg{width:26px;height:26px}
+.action .txt{display:flex;flex-direction:column;gap:3px;min-width:0}
+.action .lbl{font-weight:700;font-size:15px;letter-spacing:.01em}
+.action .sub{font-size:12px;color:var(--ink-faint);letter-spacing:.02em}
+.action:hover{
+  border-color:var(--accent);border-radius:1px;
+  background:linear-gradient(180deg,rgba(232,217,176,.05),rgba(232,217,176,0));
+  transform:translateY(-3px);
+}
+.action:active{transform:translateY(-1px)}
+/* primary */
+.action.primary{
+  background:var(--ink);color:#0a0a0c;border-color:var(--ink);
+}
+.action.primary .ico{color:#0a0a0c;opacity:.75}
+.action.primary .sub{color:rgba(10,10,12,.62)}
+.action.primary:hover{border-color:var(--accent);box-shadow:0 22px 44px rgba(0,0,0,.4)}
+/* underline sweep on hover */
+.action::after{
+  content:"";position:absolute;left:0;bottom:0;height:2px;width:100%;
+  background:var(--accent);transform:scaleX(0);transform-origin:left;
+  transition:transform .5s var(--ease-out);
+}
+.action:hover::after{transform:scaleX(1)}
+.action.primary::after{background:#0a0a0c}
+
+/* ---- footer ---- */
+footer.bottom{border-top:1px solid var(--hairline);padding:26px 0;margin-top:6vh;
+  display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+footer .copy{font-size:12px;color:var(--ink-faint);letter-spacing:.02em}
+
+/* ---- entrance (respect reduce-motion) ---- */
+.reveal{opacity:0;transform:translateY(14px)}
+.running .reveal{animation:rise 1s var(--ease-out) forwards}
+.running .reveal.d1{animation-delay:.08s}
+.running .reveal.d2{animation-delay:.18s}
+.running .reveal.d3{animation-delay:.28s}
+.running .reveal.d4{animation-delay:.38s}
+.running .reveal.d5{animation-delay:.48s}
+@keyframes rise{to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  .grid-lines,.glow{animation:none;opacity:.35}
+  .action,footer .navlinks a{transition:none}
+  .reveal{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+
+/* ---- responsive tightening ---- */
+@media (max-width:560px){
+  header.top .meta{display:none}
+  .actions{grid-template-columns:1fr}
+  .principal{min-height:auto;padding-top:10vh}
+  .trust span{letter-spacing:.1em;padding:6px 10px}
+}
+</style>
 </head>
-<body>
-    <header>
-        <h1>Martin Ilievski</h1>
-        <p>Motion Designer & Animator</p>
-        <p>Top Rated • 100% Job Success • 225+ Completed Projects</p>
-    </header>
-    
-    <section class="links">
-        <a href="https://www.upwork.com/freelancers/~014f22a842c569a2fd" target="_blank" class="btn">Hire Me on Upwork</a><br>
-        <a href="https://drive.google.com/drive/folders/1AZZWirZZxrkWcxcXXNXUd52KB4FM_qJg?usp=drive_link" target="_blank" class="btn btn-secondary">Google Drive Portfolio</a><br>
-        <a href="https://www.youtube.com/@macidoniaproject" target="_blank" class="btn">YouTube Channel</a><br>
-        <a href="https://www.linkedin.com/in/macidoniadesign/" target="_blank" class="btn btn-secondary">LinkedIn Profile</a>
-    </section>
-    
-    <footer>
-        <p style="text-align:center; margin-top:40px; color:#7f8c8d;">
-            &copy; <span id="year"></span> Martin Ilievski. All rights reserved.
-        </p>
+<body class="running">
+
+<div class="scene" aria-hidden="true">
+  <div class="grid-lines"></div>
+  <div class="glow"></div>
+  <div class="vignette"></div>
+</div>
+
+<div class="page">
+
+  <header class="top reveal">
+    <div class="marca">
+      <span class="mark" aria-hidden="true">M</span>
+      <span class="word">Macidonia&nbsp;Design</span>
+    </div>
+    <div class="meta">Motion&nbsp;·&nbsp;Animation&nbsp;·&nbsp;Creative&nbsp;Automation</div>
+  </header>
+
+  <section class="principal">
+    <div class="kicker reveal d1">Motion Designer &amp; Animator</div>
+    <h1 class="masthead reveal d1">Martin <span class="em">Ilievski</span></h1>
+    <p class="lede reveal d2">
+      I build <strong>scroll-stopping motion</strong> that converts — from brand intros and
+      ads to Lottie, GIF and programmatic Remotion. Rooted in craft,
+      tailored workflows, aimed at results.
+    </p>
+    <div class="trust reveal d3">
+      <span><b>Top Rated</b> &nbsp;·&nbsp; Upwork</span>
+      <span><b>100%</b> Job Success</span>
+      <span><b>250+</b> Projects</span>
+    </div>
+    <nav class="actions reveal d4" aria-label="Work and profiles">
+      <a class="action primary" href="https://www.upwork.com/freelancers/~014f22a842c569a2fd" target="_blank" rel="noopener">
+        <span class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 21V5m18 16V3M7 17v-4m5 4V9m5 8V6"/></svg>
+        </span>
+        <span class="txt"><span class="lbl">Hire me on Upwork</span><span class="sub">Top Rated · start a project</span></span>
+      </a>
+      <a class="action" href="https://drive.google.com/drive/folders/1AZZWirZZxrkWcxcXXNXUd52KB4FM_qJg?usp=drive_link" target="_blank" rel="noopener">
+        <span class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2 3 8v8l9 6 9-6V8l-9-6Z"/><path d="m3 8 9 6 9-6M12 14v8"/></svg>
+        </span>
+        <span class="txt"><span class="lbl">Portfolio</span><span class="sub">Google Drive · by category</span></span>
+      </a>
+      <a class="action" href="https://www.youtube.com/@macidoniaproject" target="_blank" rel="noopener">
+        <span class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 8v8a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V8a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4Z" transform="translate(0 -1)"/><path d="m10 9 5 3-5 3V9Z"/></svg>
+        </span>
+        <span class="txt"><span class="lbl">YouTube</span><span class="sub">Proof of craft · playlists</span></span>
+      </a>
+      <a class="action" href="https://www.linkedin.com/in/macidoniadesign/" target="_blank" rel="noopener">
+        <span class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10v7M7 7v.01M11 17v-4a2.5 2.5 0 0 1 5 0v4"/></svg>
+        </span>
+        <span class="txt"><span class="lbl">LinkedIn</span><span class="sub">Network &amp; history</span></span>
+      </a>
+    </nav>
+  </section>
+
+<footer class="bottom reveal d5">
+      <span class="copy">© <span id="year"></span> Martin Ilievski. All rights reserved.</span>
     </footer>
-    
-    <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
+
+</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  // reveal only for capable/reduced-safe clients
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.body.classList.remove('running');
+  }
+</script>
 </body>
 </html>
